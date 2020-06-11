@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EventBundle\Entity\Livraison" table="livraison">
+    <indexes>
+      <index name="IDX_A60C9F1FF8646701" columns="livreur_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="livreurId" type="integer" column="livreur_id" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="livraisonAdresse" type="string" column="livraison_adresse" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="livraisonProduits" type="string" column="livraison_produits" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="montantTotal" type="float" column="montant_total" precision="10" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

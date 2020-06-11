@@ -1,0 +1,36 @@
+{% extends 'front.html.twig' %}
+
+
+
+{% block main %}
+
+    <!-- Page Add Section Begin -->
+    <section class="page-add cart-page-add" xmlns="http://www.w3.org/1999/html">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>Commande<span>.</span></h2>
+                        <a href="#">Home</a>
+                        <a class="active" href="#">Commande</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+
+    <center>
+    <ol>
+        <li><b>Commande id :</b>{{ cmd.id }}</li>
+        <li><b>Nom de l'utilisateur :</b> {{ cmd.userid }}</li>
+        <li><b>Adresse :</b> {{ cmd.adresse }}</li>
+        <li><b>Telephone :</b> {{ cmd.telephone }}</li>
+        <li><b>Prix :</b> {{ cmd.prix }} DT</li>
+    </ol>
+    </center>
+
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+event_homepage:
+    path:     /
+    defaults: { _controller: EventBundle:Event:home }
+event_add:
+    path:     /addEvent
+    defaults: { _controller: EventBundle:Event:addEvent }
+eventadmin_add:
+    path:     /addEventAdmin/
+    defaults: { _controller: EventBundle:Eventadmin:addEventAdmin }
+event_show:
+    path:     /showevent
+    defaults: { _controller: EventBundle:Event:afficheEvent }
+eventadmin_show:
+        path:     /showEventadmin/
+        defaults: { _controller: EventBundle:Eventadmin:afficheEventadmin }
+event_delete:
+    path:     /deleteevent/{idreservation}
+    defaults: { _controller: EventBundle:Event:deleteevent }
+event_update:
+        path:  /updateevent/{idreservation}
+        defaults: { _controller: EventBundle:Event:updateevent}
+eventadmin_update:
+    path:  /UpdateEventadmin/{idreservation}
+    defaults: { _controller: EventBundle:Eventadmin:updateeventadmin}
+eventadmin_delete:
+    path:     /deleteeventadmin
+    defaults: { _controller: EventBundle:Eventadmin:deleteeventadmin }
+pdf:
+    path:  /pdf/{idreservation}
+    defaults: { _controller: EventBundle:Event:pdf }
+recherche_show:
+        path:     /showRecherche/
+        defaults: { _controller: EventBundle:Eventadmin:recherche}
+
+allA:
+    path:     /allJSON
+    defaults: { _controller: EventBundle:Event:all}
+update_post:
+    path:     /postupdate/{idreservation}
+    defaults: { _controller: EventBundle:Event:updatepost}
+delete_post:
+    path:     /delete/{idreservation}
+    defaults: { _controller: EventBundle:Event:delete}
+add_post:
+    path:     /add
+    defaults: { _controller: EventBundle:Event:add}

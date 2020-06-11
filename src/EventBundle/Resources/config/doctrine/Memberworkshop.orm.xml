@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EventBundle\Entity\Memberworkshop" table="memberworkshop">
+    <indexes>
+      <index name="fk_idWor" columns="idW"/>
+      <index name="fffk_idUse" columns="idUser"/>
+    </indexes>
+    <id name="idm" type="integer" column="idM">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="iduser" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="idUser" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idw" target-entity="Workshop" fetch="LAZY">
+      <join-columns>
+        <join-column name="idW" referenced-column-name="idW"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

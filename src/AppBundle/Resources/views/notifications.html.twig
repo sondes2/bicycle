@@ -1,0 +1,23 @@
+<div class="dropdown for-notification">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bell"></i>
+        <span class="count bg-danger">3</span>
+    </button>
+
+    <ul class="dropdown-menu" id="notifications" aria-labelledby="notification">
+        {% for notif in notifications %}
+            <p class="red">{{notif.x_title}}</p>
+            <li class="dropdown-item media" href="#">
+                <i class="fa fa-check"></i>
+                <p>{{notif.x_description}}</p>
+                <a href="{{ path(notif.x_route, notif.x_parameters) }}"> See</a>
+            </li>
+        {% else %}
+            <a class="dropdown-item media" href="#">
+                <i class="fa fa-info"></i>
+                <p>List is Empty</p>
+            </a>
+        {% endfor %}
+    </ul>
+
+</div>

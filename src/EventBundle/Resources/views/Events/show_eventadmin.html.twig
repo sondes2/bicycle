@@ -1,0 +1,69 @@
+{% extends 'back.html.twig' %}
+
+
+{% block main %}
+    <h1> search by place</h1>
+    <form method="POST">
+        <input type="text" name="place">
+        <input type="submit" value="search">
+    </form>
+    <!-- Page Add Section Begin -->
+    <section class="page-add Reservation-page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>Reservation<span>.</span></h2>
+                        <a href="#">Home</a>
+                        <a class="active" href="#">Reservation</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+    <!-- Cart Page Section Begin -->
+    <div class="event-page">
+        <div class="container">
+            <div class="event-table">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="product-h">idreservation</th>
+                        <th>date</th>
+                        <th class="quan">place</th>
+                        <th>bike</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    {% set total=0 %}
+                    {% for event in event %}
+
+                        <tbody>
+                        <tr>
+
+                            <td class="idreservation-col">{{ event.idreservation }}</td>
+                            <td class="date-col" style="font-style: inherit; font-weight: bold">{{  event.date|date() }} </td>
+                            <td class="place-col" >{{event.place}} </td>
+                            <td class="bike-col" >{{event.bike}} </td>
+                            <td class="reservation-close"><a href="{{ path('eventadmin_delete',{idreservation:event.idreservation}) }}" style="color: #0b0b0b"> <button type="button" class="btn btn-danger " style="margin: 10px 0; width:100%" > supprimer </button></a></td>
+                            <td class="reservation-update"><a href="{{ path('eventadmin_update',{idreservation:event.idreservation}) }}" style="color: #0b0b0b"><button type="button" class="btn btn-warning " style="margin: 10px 0;width:100%" > modifier </button></a></td>
+
+                        </tr>
+                        </tbody>
+
+                    {% endfor %}
+                </table>
+
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(event) }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Cart Page Section End -->
+
+{% endblock %}

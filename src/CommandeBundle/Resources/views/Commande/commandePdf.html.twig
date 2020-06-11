@@ -1,0 +1,16 @@
+{% extends 'front.html.twig' %}
+{% block main %}
+
+    <h1>Facture</h1>
+
+
+<br><br><br><br>
+
+    <p><b>Commande id :</b> {{ cmd.id }}</p>
+    <p><b>Nom :</b> {{ cmd.userid }}</p>
+    <p><b>Adresse :</b> {{ cmd.adresse }}</p>
+    <p><b>Telephone :</b> {{ cmd.telephone }}</p>
+    <p><b>Prix :</b> {{ cmd.prix }} DT</p>
+{% endblock %}
+
+

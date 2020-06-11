@@ -1,0 +1,119 @@
+{% extends 'front.html.twig' %}
+{% block main %}
+  <div class="container">
+      <div class="input-group custom-search-form " style="width: 50% ;margin: 20px 20%;">
+          <input type="text" id="search" class="form-control" placeholder="Search Bike" style="border: 3px solid black" >
+      </div>
+     <div class="row" id="ListVelo">
+        {% for produit in produits %}
+        <div class="col-lg-3 col-sm-6 " id="divglobale">
+            <div class="single-product-item">
+                <figure>
+                    <a href="{{ path('produit_detailsProduitClient',{'id':produit.id}) }}" ><img src="{{ asset('produit/uploads/images/' ~ produit.image ) }}" alt=""></a>
+                    <div class="p-status">new</div>
+                </figure>
+                <div class="product-text">
+                    <h6>{{produit.libelle}}</h6>
+                    <p>{{produit.prix}} TND</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+     </div>
+      {# display navigation #}
+      <div class="navigation">
+          {{ knp_pagination_render(produits) }}
+      </div>
+  </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 0;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#ListVelo").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('produit_searchAjax') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'velos') {
+                                            if (id !== 'error') {
+                                                entitySelector.append('' +
+                                                    ' <div class="col-lg-3 col-sm-6 " id="divglobale"> ' +
+                                                    '<div class="single-product-item">' +
+                                                    '<figure>' +
+                                                    '<a href="/esprit/bicycle/web/app_dev.php/client/detailsProduit/'+value[0]+'" >' +
+                                                    '<img src="/esprit/bicycle/web/produit/uploads/images/'+value[1]+'" alt="">' +
+                                                    '</a>' +
+                                                    '<div class="p-status">new</div>' +
+                                                    '</figure>' +
+                                                    '<div class="product-text">' +
+                                                    '<h6>'+value[2]+'</h6>' +
+                                                    '<p>'+value[3]+' TND</p>' +
+                                                    '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            } else {
+                                                $(".navigation").html('');
+                                                entitySelector.append('<h1>'+value+'</h1>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
+
+{% endblock %}
+{#
+var obj = jQuery.parseJSON(msg);
+console.log(obj.velos);
+
+if (obj.velos == "0") {
+$("#ListVelo").html("non trouve");
+}
+else {
+
+$.each(obj, function (key,value) {
+for (i=0;i<key.length;i++){
+$("#ListVelo").append(
+'        <div class="col-lg-3 col-sm-6 " id="divglobale">\n' +
+    '            <div class="single-product-item">\n' +
+        '                <figure>'+
+            '<a href="/detailsProduit/"'+value[i][0]+' >' +
+            ' <img src="/esprit/gestiondesproduits/web/produit/uploads/images/'
+                                            +value[i][1]+'" alt="">' +
+            '</a>'+
+            ' <div class="p-status">new</div>\n' +
+            '                </figure>'+
+        ' <div class="product-text">\n' +
+            '                    <h6>'+value[i][2]+'</h6>\n' +
+            '                    <p>'+value[i][3]+' TND</p>\n' +
+            '                </div>'+
+        '            </div>\n' +
+    '        </div>'
+)
+//              alert(value[i][1]);
+#}

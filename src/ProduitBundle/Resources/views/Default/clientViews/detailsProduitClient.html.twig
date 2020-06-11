@@ -1,0 +1,94 @@
+{% extends 'front.html.twig' %}
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="product-slider owl-carousel">
+                <div class="product-img">
+                    <figure>
+                        <img src="{{ asset('produit/uploads/images/' ~ produit.image ) }}" alt="">
+                        <div class="p-status">new</div>
+                    </figure>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="product-content">
+                <h2>{{produit.libelle}}</h2>
+                <div class="pc-meta">
+                    <h5>{{ produit.prix }} TND </h5>
+
+
+                    <div class="rating" id="#rat">
+                        {% if is_granted('ROLE_USER') %}
+                            {% for i in 1.. rat %}
+                                {# <i class="fa fa-star"></i>#}
+                                <img src="{{ asset('client/img/star-solid.svg') }}" width="20px" onclick="rating({{ i }},{{ produit.id }})">
+                            {% endfor %}
+                            {% if  rat  < 5 %}
+                                {% for i in rat..4 %}
+                                    <img src="{{ asset('client/img/star-regular.svg') }}" onclick="rating({{ i+1 }},{{ produit.id }})" width="20px">
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}
+                            {% for i in 1..rat %}
+                               {# <i class="fa fa-star"></i>#}
+                                <img src="{{ asset('client/img/star-solid.svg') }}" width="20px" >
+                            {% endfor %}
+                            {% if rat < 5 %}
+                                {% for i in rat..4 %}
+                                    <img src="{{ asset('client/img/star-regular.svg') }} " width="20px" >
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
+                    viverra maecenas accumsan lacus vel facilisis.</p>
+                <ul class="tags">
+                    <li><span>Category :</span> {{ produit.categorie.libelle }}</li>
+                </ul>
+                <div class="product-quantity">
+
+                        {{ form (form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function rating(pos,id){
+            $.ajax({
+                type: "GET",
+                url :  "{{ path('produit_rating') }}",
+                data: {
+                    'rat' : pos,
+                    'id':id
+                },
+                success: function(){
+                    $(".rating").empty();
+                    for (var i=0; i<pos; i++) {
+                        $(".rating").append('' +
+                            '<img src="/esprit/gestiondesproduits/web/client/img/star-solid.svg" width="20px">'
+                        );
+                    }
+                    if(pos<5){
+                        for (var i=pos ;i<5;i++)
+                        $(".rating").append('' +
+                            '<img src="/esprit/gestiondesproduits/web/client/img/star-regular.svg" width="20px" >'
+                        );
+                    }
+
+                }
+            });
+
+        }
+
+    </script>
+{% endblock %}

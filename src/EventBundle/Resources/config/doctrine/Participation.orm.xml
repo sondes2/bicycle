@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EventBundle\Entity\Participation" table="participation">
+    <indexes>
+      <index name="fk_idC" columns="idComp"/>
+      <index name="fk_idU" columns="idUser"/>
+    </indexes>
+    <id name="idparticipation" type="integer" column="idParticipation">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="iduser" type="integer" column="idUser" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idcomp" type="integer" column="idComp" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="rang" type="integer" column="rang" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="record" type="integer" column="record" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

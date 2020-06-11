@@ -1,0 +1,48 @@
+{% extends 'back.html.twig' %}
+
+{% block main %}
+    <h1>Livraisons list</h1>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Livreur</th>
+            <th scope="col">Adresses</th>
+            <th scope="col">Produits</th>
+            <th scope="col">Montant a payer</th>
+            <th scope="col">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for livraison in livraisons %}
+
+            <tr>
+                <td scope="row"><a href="{{ path('livraison_show', { 'id': livraison.id }) }}">{{ livraison.id }}</a></td>
+
+                <td>{{ livraison.livreurId }}</td>
+                <td>{{ livraison.livraisonAdresse }}</td>
+                <td>{{ livraison.livraisonProduits }}</td>
+                <td>{{ livraison.montantTotal }}<a> TND</a></td>
+                <td>
+                    <ul style="list-style: none;">
+                        <li>
+
+                            <a class="btn btn-primary btn-lg"" href="{{ path('livraison_edit', { 'id': livraison.id }) }}">edit</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('livraison_new') }}">Create a new livraison</a>
+        </li>
+    </ul>
+{% endblock %}

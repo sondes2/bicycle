@@ -1,0 +1,53 @@
+{% extends 'back.html.twig' %}
+{% block title %}
+    Tous les produits
+{% endblock %}
+
+{% block main %}
+    <div style="display: flex;justify-content: space-around;">
+        <a href="{{ path('produit_produitsHorsStock') }}" style="width: 20%">
+            <button type="button" class="btn btn-danger " style="margin: 10px 0; width:100%" > Produits Hors Stock</button>
+        </a>
+        <a href="{{ path('produit_ajouterProduits') }}" style=" width: 50%">
+            <button type="button" class="btn btn-success " style=" width:100%;margin: 10px 0;" > Ajouter Produit</button>
+        </a>
+        <a href="{{ path('produit_produitsEnReptureDeStock') }}" style="width: 20%">
+            <button type="button" class="btn btn-warning " style="margin: 10px 0;width:100%" > Produits En Repture de stock</button>
+        </a>
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Reference</th>
+            <th scope="col">Libelle</th>
+            <th scope="col">Quantite</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Action</th>
+            <th scope="col">Image</th>
+        </tr>
+        </thead>
+        <tbody>
+       {% for produit in produits %}
+        <tr>
+            <th scope="row">{{produit.id}}</th>
+            <td>{{produit.libelle}}</td>
+            <td>{{produit.qte}}</td>
+            <td>{{produit.prix}}</td>
+            <td>{{produit.Categorie.libelle}}</td>
+
+            <td>
+                <a  class="btn btn-outline-dark" href="{{ path('produit_modifierProduits', { 'id': produit.id }) }}">Edit</a>
+                <a class="btn btn-outline-danger"  href="{{ path('produit_supprimerProduits', { 'id': produit.id }) }}"> Delete </a>
+            </td>
+            <td><img src="{{ asset('produit/uploads/images/' ~ produit.image ) }} " width="60px" height="50px" /> </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(produits) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,98 @@
+commande_pdf:
+    path:     /client/convert/{id}
+    defaults: { _controller: CommandeBundle:Default:convert }
+
+commande_ajout_client:
+    path:     /client/ajoutCmdClient
+    defaults: { _controller: CommandeBundle:gestioncmd:ajoutCmdClient }
+
+commande_affiche_admin:
+    path:     /admin/afficheCmdAdmin
+    defaults: { _controller: CommandeBundle:gestioncmd:afficheCmdAdmin }
+
+export:
+    path:     /export
+    defaults: { _controller: CommandeBundle:gestioncmd:export }
+
+commande_supprimer_admin:
+    path:     /client/supprimerCmdAdmin/{id}
+    defaults: { _controller: CommandeBundle:gestioncmd:supprimerCmdAdmin }
+commande_affiche_Client:
+    path:     /client/afficheCmdClient/{id}
+    defaults: { _controller: CommandeBundle:gestioncmd:afficheCmdClient }
+
+lignecommande_ajout_client:
+    path:     /client/ajoutLigneClient
+    defaults: { _controller: CommandeBundle:lignecom:ajoutLigneClient }
+
+lignecommande_affiche_client:
+    path:     /client/afficherLigneClient
+    defaults: { _controller: CommandeBundle:lignecom:afficherLigneClient }
+lignecommande_supprimer_client:
+    path:     /client/supprimerLigneClient/{id}
+    defaults: { _controller: CommandeBundle:lignecom:supprimerLigneClient }
+
+lignecommande_calcule_prix:
+    path:     /client/calculprix
+    defaults: { _controller: CommandeBundle:gestioncmd:calculprix }
+
+lignecommande_affiche_admin:
+    path:     /admin/afficheLigneAdmin
+    defaults: { _controller: CommandeBundle:lignecom:afficheLigneAdmin }
+
+all_ligne:
+    path:     /lignecmd/all
+    defaults: { _controller: CommandeBundle:lignecom:all }
+
+addd:
+    path:     /lignecmd/add
+    defaults: { _controller: CommandeBundle:lignecom:add }
+
+all_authr:
+    path:     /author
+    defaults: { _controller: CommandeBundle:lignecom:affichee }
+
+allaff:
+    path:     /lignecmd/affich/{id}
+    defaults: { _controller: CommandeBundle:lignecom:AfficherLigneDeCommandeJson}
+
+
+all_cmd:
+    path:     /cmd/all
+    defaults: { _controller: CommandeBundle:gestioncmd:all }
+
+ajout_cmd:
+    path:     /cmd/ajout
+    defaults: { _controller: CommandeBundle:gestioncmd:add }
+
+
+ajouter_commande_json:
+    path:    /ajoutLigneCommandeJson/{id}/{idP}/{quantite}
+    defaults: { _controller: CommandeBundle:lignecom:AjoutLigneDeCommandeJson }
+
+
+dfjsfs:
+    path:    /affJson/{id}
+    defaults: { _controller: CommandeBundle:lignecom:afficheJson }
+
+sqqf:
+    path:    /delete/{id}
+    defaults: { _controller: CommandeBundle:lignecom:supprimerligne }
+
+dgtsry:
+    path:    /add/{id}/{adresse}/{prix}/{telephone}
+    defaults: { _controller: CommandeBundle:gestioncmd:ajoutWS }
+
+
+loginMobile:
+    path:     /loginMobile/{username}/{password}
+    defaults: { _controller: CommandeBundle:gestioncmd:loginMobile }
+
+
+loginMobilee:
+    path:     /loginMobilee/{username}/{password}
+    defaults: { _controller: CommandeBundle:gestioncmd:loginnn }
+
+curentuser:
+    path:     /currentuser
+    defaults: { _controller: CommandeBundle:gestioncmd:current }

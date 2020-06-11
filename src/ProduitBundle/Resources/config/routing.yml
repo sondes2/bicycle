@@ -1,0 +1,90 @@
+produit_homepage:
+    path:     /admin
+    defaults: { _controller: ProduitBundle:Default:indexAdmin }
+
+produit_afficheProduits:
+    path:     /admin/afficheproduits
+    defaults: { _controller: ProduitBundle:Produit:afficheProduits }
+
+produit_ajouterProduits:
+    path:     /admin/ajouterProduit
+    defaults: { _controller: ProduitBundle:Produit:ajouterProduit }
+
+produit_modifierProduits:
+    path:     /admin/modifierProduit/{id}
+    defaults: { _controller: ProduitBundle:Produit:modifierProduit }
+
+produit_supprimerProduits:
+    path:     /admin/supprimerProduit/{id}
+    defaults: { _controller: ProduitBundle:Produit:supprimerProduit }
+
+produit_produitsHorsStock:
+    path:     /admin/produitsHorsStock
+    defaults: { _controller: ProduitBundle:Produit:produitsHorsStock }
+
+
+produit_produitsEnReptureDeStock:
+    path:     /admin/produitsEnReptureDeStock
+    defaults: { _controller: ProduitBundle:Produit:produitsEnReptureDeStock }
+
+produit:
+    path:     /newproduit
+    defaults: { _controller: ProduitBundle:Produit:new }
+
+
+all:
+    path:     /produit/kol
+    defaults: { _controller: ProduitBundle:Produit:all }
+
+
+kol:
+    path:     /produit/all
+    defaults: { _controller: ProduitBundle:Produit:afficheP }
+
+
+
+
+
+
+
+produit_homepageclient:
+    path:     /client
+    defaults: { _controller: ProduitBundle:Default:indexClient }
+
+produit_afficheProduitsClient:
+    path:     /client/afficheproduits
+    defaults: { _controller: ProduitBundle:ProduitClient:afficheProduitsClient }
+
+produit_detailsProduitClient:
+    path:     /client/detailsProduit/{id}
+    defaults: { _controller: ProduitBundle:ProduitClient:detailsProduitClient }
+
+produit_searchAjax:
+    path:     /client/searchAjax
+    defaults: { _controller: ProduitBundle:ProduitClient:searchAjax }
+
+
+produit_rating:
+    path:     /client/rating
+    defaults: { _controller: ProduitBundle:Rating:rating }
+
+
+
+
+
+add:
+    path:     /produit/addProduct/{libelle}/{prix}/{qte}/{categorie}/{image}
+    defaults: { _controller: ProduitBundle:Produit:addProduct}
+
+
+updat:
+    path:     /produit/updateProduct/{id}/{libelle}/{prix}/{qte}/{categorie}/{image}
+    defaults: { _controller: ProduitBundle:Produit:updateProduct }
+
+delet:
+    path:     /produit/deleteProduct/{id}
+    defaults: { _controller: ProduitBundle:Produit:deleteProd}
+
+categorie_all:
+    path:     /categorie/all
+    defaults: { _controller: ProduitBundle:Produit:allCategory}
