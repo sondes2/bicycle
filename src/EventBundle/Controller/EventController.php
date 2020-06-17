@@ -5,6 +5,7 @@ namespace EventBundle\Controller;
 use Doctrine\DBAL\Types\DateType;
 use EventBundle\Entity\Reservations;
 use EventBundle\Form\ReservationsType;
+use ProduitBundle\Entity\Categorie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EventBundle\Entity\Produit;
 use Symfony\Component\HttpFoundation\Request;
@@ -131,7 +132,7 @@ class EventController extends Controller
     }
     public function allAction()
     {
-        $event =$this->getDoctrine()->getManager()
+       /* $event =$this->getDoctrine()->getManager()
             ->getRepository('EventBundle:Reservations')->findAll();
         $normalizer = new ObjectNormalizer();
         $normalizer->setCircularReferenceLimit(2);
@@ -141,32 +142,50 @@ class EventController extends Controller
         });
         $serializer =new Serializer(array(new Serializer(),$normalizer));
         $formatted =$serializer->normalize($event);
-        return new JsonResponse($formatted);
+        return new JsonResponse($formatted);*/
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'SELECT c.idreservation,c.date,c.place,c.bike,c.iduser	
+        FROM EventBundle:Reservations c  '
+        );
+        $event = $query->getArrayResult();
+        $response = new Response(json_encode($event));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
 
     }
-    public function addAction(Request $request)
+    public function addAction(Request $request,$place,$bike,$iduser)
     {
         $em = $this->getDoctrine()->getManager();
         //$prod = $em->getRepository("EventBundle:Produit")->find($libelle);
+
         $event = new Reservations();
         $form = $this->createForm(ReservationsType::class, $event);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            // $event->setIdUser(2);
+
+
+        $em = $this->getDoctrine()->getManager();
+
             $event->setIduser(89);
-            $event->setDate($form['date']->getData());
-            $event->setPlace($form['place']->getData());
-            $produit = $form['bike']->getData();
-            $event->setBike($produit->getLibelle());
+        //$post->setDescription($request->get('description'));
+        $date = new \DateTime($request->get("date"));
+           $event->setDate($date);
+
+            $event->setPlace($request->get("place"));
+        $event->setBike($request->get("bike"));
+        //$produit=$this->getDoctrine()->getManager()->getRepository(Produit::class)->findOneBy(['libelle'=>$bike]);
+
+        //$event->setBike($produit);
             $em->persist($event);
             $em->flush();
 
 
-        }
+
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($event);
         return new JsonResponse($formatted);
+
+
      }
     public function deleteAction(Request $request,$idreservation)
     {
@@ -187,13 +206,65 @@ class EventController extends Controller
     {
         $em=$this->getDoctrine()->getManager();
         $event = $em->getRepository('EventBundle:Reservations')->find($idreservation);
-        $event->setdate($request->get('date'));
+        $date = new \DateTime($request->get("date"));
+        $event->setDate($date);
         $event->setplace($request->get('place'));
+        $event->setbike($request->get('bike'));
         $em->persist($event);
         $em->flush();
         return new JsonResponse("success");
 
     }
+
+    public function JsonAction(Request $request, $id)
+    {
+        //$user = $this->get('security.token_storage')->getToken()->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $p = $em->getRepository('AppBundle:Post')->find($id);
+        //$user = $em->getRepository("AppBundle:User")->find($id);
+        //  $wishlist = $em->getRepository('CommandeBundle:lignecmd')->findOneBy(array('userid' => $user));
+        $lwishlist = $em->getRepository('AppBundle:Postcomment')->findBy(array('post' => $p));
+        foreach ($lwishlist as $l) {
+//            //  foreach ($produit as $p) {
+            //$user = $em->getRepository("AppBundle:User")->find($l->getUser());
+            $lw[] = array(
+                //  'user' =>$user->getId(),
+                'id' =>$l->getId(),
+                //'posted_at'=>$l->getPostedAt(),
+                // 'post' => $l->getPost()->getId(),
+                'content' => $l->getContent(),
+
+            );
+        }
+
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+// Add Circular reference handler
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer=new Serializer($normalizers);
+        //  $serializer = new Serializer([new ObjectNormalizer()]);
+        $formated = $serializer->normalize($lw);
+        return new JsonResponse($formated);
+    }
+    public function allbikeAction()
+    {
+        $event =$this->getDoctrine()->getManager()
+            ->getRepository('EventBundle:Produit')->findAll();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getLibelle();
+        });
+        $serializer =new Serializer(array(new Serializer(),$normalizer));
+        $formatted =$serializer->normalize($event);
+        return new JsonResponse($formatted);
+
+    }
+
 }
 
 

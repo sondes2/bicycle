@@ -36,11 +36,11 @@ allA:
     path:     /allJSON
     defaults: { _controller: EventBundle:Event:all}
 update_post:
-    path:     /postupdate/{idreservation}
+    path:     /postupdate/{idreservation}/{date}/{place}/{bike}
     defaults: { _controller: EventBundle:Event:updatepost}
 delete_post:
     path:     /delete/{idreservation}
     defaults: { _controller: EventBundle:Event:delete}
 add_post:
-    path:     /add
+    path:     /add/{date}/{place}/{bike}/{iduser}
     defaults: { _controller: EventBundle:Event:add}

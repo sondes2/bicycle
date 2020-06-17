@@ -148,8 +148,8 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 }
 
                 // add_post
-                if ('/Event/add' === $pathinfo) {
-                    return array (  '_controller' => 'EventBundle\\Controller\\EventController::addAction',  '_route' => 'add_post',);
+                if (0 === strpos($pathinfo, '/Event/add') && preg_match('#^/Event/add/(?P<date>[^/]++)/(?P<place>[^/]++)/(?P<bike>[^/]++)/(?P<iduser>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'add_post']), array (  '_controller' => 'EventBundle\\Controller\\EventController::addAction',));
                 }
 
                 // allA
@@ -231,7 +231,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             }
 
             // update_post
-            if (0 === strpos($pathinfo, '/Event/postupdate') && preg_match('#^/Event/postupdate/(?P<idreservation>[^/]++)$#sD', $pathinfo, $matches)) {
+            if (0 === strpos($pathinfo, '/Event/postupdate') && preg_match('#^/Event/postupdate/(?P<idreservation>[^/]++)/(?P<date>[^/]++)/(?P<place>[^/]++)/(?P<bike>[^/]++)$#sD', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'update_post']), array (  '_controller' => 'EventBundle\\Controller\\EventController::updatepostAction',));
             }
 

@@ -30,8 +30,7 @@ class AppKernel extends Kernel
             new EspritApiBundle\EspritApiBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new EventBundle\EventBundle(),
-
-
+            new BlogBundle\BlogBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

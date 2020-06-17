@@ -30,6 +30,7 @@
       <parameter key="EspritApiBundle">EspritApiBundle\EspritApiBundle</parameter>
       <parameter key="JMSSerializerBundle">JMS\SerializerBundle\JMSSerializerBundle</parameter>
       <parameter key="EventBundle">EventBundle\EventBundle</parameter>
+      <parameter key="BlogBundle">BlogBundle\BlogBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -141,6 +142,11 @@
         <parameter key="parent">null</parameter>
         <parameter key="path">C:\wamp64\www\bicycle\src\EventBundle</parameter>
         <parameter key="namespace">EventBundle</parameter>
+      </parameter>
+      <parameter key="BlogBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\wamp64\www\bicycle\src\BlogBundle</parameter>
+        <parameter key="namespace">BlogBundle</parameter>
       </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
@@ -4393,6 +4399,14 @@
         <argument>!Event</argument>
       </call>
       <call method="addPath">
+        <argument>C:\wamp64\www\bicycle\src\BlogBundle/Resources/views</argument>
+        <argument>Blog</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp64\www\bicycle\src\BlogBundle/Resources/views</argument>
+        <argument>!Blog</argument>
+      </call>
+      <call method="addPath">
         <argument>C:\wamp64\www\bicycle\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -4650,6 +4664,14 @@
       <call method="addPath">
         <argument>C:\wamp64\www\bicycle\src\EventBundle/Resources/views</argument>
         <argument>!Event</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp64\www\bicycle\src\BlogBundle/Resources/views</argument>
+        <argument>Blog</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp64\www\bicycle\src\BlogBundle/Resources/views</argument>
+        <argument>!Blog</argument>
       </call>
       <call method="addPath">
         <argument>C:\wamp64\www\bicycle\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
